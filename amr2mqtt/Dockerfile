@@ -1,29 +1,14 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.7.1
 
-# https://hub.docker.com/_/alpine
-FROM alpine:3.16.2 as build_rtlamr
+# https://hub.docker.com/_/golang
+FROM golang:1.24.0-alpine3.21 as build_rtlamr
 # https://github.com/bemasher/rtlamr/releases
-ENV RTLAMR_VERSION 0.9.1
+ENV RTLAMR_VERSION 0.9.4
 
+RUN go install
 RUN set -eux; \
-    apk update; \
-        apk add --no-cache --virtual .build-deps \
-            tar=1.34-r0 \
-            curl=7.83.1-r2 \
-        ; \
-    APKARCH="$(apk --print-arch)"; \
-    case "${APKARCH}" in \
-        x86_64)  BINARCH='amd64' ;; \
-        armhf)   BINARCH='arm' ;; \
-        armv7)   BINARCH='arm' ;; \
-        aarch64) BINARCH='arm64' ;; \
-        *) echo >&2 "error: unsupported architecture (${APKARCH})"; exit 1 ;; \
-    esac; \
-    curl -J -L -o /tmp/rtlamr.tar.gz \
-    "https://github.com/bemasher/rtlamr/releases/download/v${RTLAMR_VERSION}/rtlamr_linux_${BINARCH}.tar.gz"; \
-    tar -xf /tmp/rtlamr.tar.gz -C /usr/bin; \
-    chmod a+x /usr/bin/rtlamr; \
-    rm /tmp/rtlamr.tar.gz;
+    go install "github.com/bemasher/rtlamr@v${RTLAMR_VERSION}"
+    mv ./bin/rtlamr /usr/bin/rtlamr
 
 # https://github.com/hassio-addons/addon-debian-base/releases
 # hadolint ignore=DL3006
@@ -31,19 +16,18 @@ FROM ${BUILD_FROM}
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -qy --no-install-recommends \ 
-        ca-certificates=20210119 \
-        librtlsdr-dev=0.6.0-3 \
-        python3-paho-mqtt=1.5.1-1 \
-        python3-dateutil=2.8.1-6 \
-        rtl-sdr=0.6.0-3 \
+    apt-get install -qy --no-install-recommends \
+        ca-certificates \
+        librtlsdr-dev \
+        python3-paho-mqtt \
+        python3-dateutil \
+        rtl-sdr \
         ; \
-    update-ca-certificates; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*; \
     \
     echo "Add user for AMR2MQTT"; \
     mkdir -p /data/amr2mqtt; \
-    useradd -u 12345 -U -d /data/amr2mqtt abc; 
+    useradd -u 12345 -U -d /data/amr2mqtt abc;
 
 # Add rtlamr
 COPY --from=build_rtlamr /usr/bin/rtlamr /usr/bin/rtlamr
