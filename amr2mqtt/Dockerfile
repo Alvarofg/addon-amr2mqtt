@@ -1,30 +1,14 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:6.2.7 
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.7.1
 
 # https://hub.docker.com/_/golang
-FROM golang:1.24.0-alpine3.21 as build_rtlamr
+FROM golang:1.24.0-alpine3.21 AS build_rtlamr
 # https://github.com/bemasher/rtlamr/releases
-ENV RTLAMR_VERSION 0.9.4
-
-RUN go install
+ENV RTLAMR_VERSION=0.9.4
+ENV GOBIN=/usr/bin
 RUN set -eux; \
-    apk update; \
-        apk add --no-cache --virtual .build-deps \
-            tar=1.34-r1 \
-            curl=8.5.0-r0 \
-        ; \
-    APKARCH="$(apk --print-arch)"; \
-    case "${APKARCH}" in \
-        x86_64)  BINARCH='amd64' ;; \
-        armhf)   BINARCH='arm' ;; \
-        armv7)   BINARCH='arm' ;; \
-        aarch64) BINARCH='arm64' ;; \
-        *) echo >&2 "error: unsupported architecture (${APKARCH})"; exit 1 ;; \
-    esac; \
-    curl -J -L -o /tmp/rtlamr.tar.gz \
-    "https://github.com/bemasher/rtlamr/releases/download/v${RTLAMR_VERSION}/rtlamr_linux_${BINARCH}.tar.gz"; \
-    tar -xf /tmp/rtlamr.tar.gz -C /usr/bin; \
-    chmod a+x /usr/bin/rtlamr; \
-    rm /tmp/rtlamr.tar.gz;
+    go install "github.com/bemasher/rtlamr@v${RTLAMR_VERSION}"; \
+    rtlamr --version
+
 
 # https://github.com/hassio-addons/addon-debian-base/releases
 # hadolint ignore=DL3006
@@ -83,4 +67,4 @@ LABEL \
     org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
-    org.opencontainers.image.version=${BUILD_VERSION}
+    org.opencontainers.image.version=${BUILD_VERSION} \
