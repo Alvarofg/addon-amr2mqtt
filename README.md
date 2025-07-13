@@ -65,7 +65,7 @@ See [LICENSE](LICENSE).
 [add-repo]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAlvarofg%2Fhassio-addons
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [amridm2mqtt]: https://github.com/ragingcomputer/amridm2mqtt
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-no-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [commits-shield]: https://img.shields.io/github/commit-activity/y/Alvarofg/addon-amr2mqtt.svg
 [commits]: https://github.com/Alvarofg/addon-amr2mqtt/commits/main
