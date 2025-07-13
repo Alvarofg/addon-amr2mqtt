@@ -1,3 +1,5 @@
+# halolint ignore=DL3008
+# ignoring DL3008 (pin versions) as we are using the official images
 ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.8.3
 
 # https://hub.docker.com/_/golang
