@@ -16,9 +16,9 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: 'Override slug'
+        description: "Override slug"
         required: false
-        default: ''
+        default: ""
 
 jobs:
   information:
