@@ -81,7 +81,7 @@ See [LICENSE](LICENSE).
 [issue]: https://github.com/Alvarofg/addon-amr2mqtt/issues
 [license-shield]: https://img.shields.io/github/license/Alvarofg/addon-amr2mqtt.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[project-stage-shield]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
 [ragingcomputer]: https://github.com/ragingcomputer
 [releases-shield]: https://img.shields.io/github/release/Alvarofg/addon-amr2mqtt.svg
 [releases]: https://github.com/Alvarofg/addon-amr2mqtt/releases
