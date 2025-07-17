@@ -24,6 +24,12 @@ on:
         required: true
       GHCR_TOKEN:
         required: true
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Override slug"
+        required: false
+        default: ""
 
 jobs:
   information:
