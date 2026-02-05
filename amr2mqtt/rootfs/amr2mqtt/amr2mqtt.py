@@ -81,6 +81,15 @@ ATTRIBUTES = {
     ],
 }
 
+def restart_rtlamr():
+    global rtlamr
+    logging.warning("Restarting rtlamr...")
+    try:
+        stop_rtlamr()
+    except Exception:
+        pass
+    time.sleep(2)
+    rtlamr = start_rtlamr()
 
 def shutdown(*args, **kwargs):  # pylint: disable=unused-argument
     """Disconnect MQTT client, stop rtlamr and exit."""
@@ -95,14 +104,18 @@ def shutdown(*args, **kwargs):  # pylint: disable=unused-argument
     stop_rtlamr()
     sys.exit(0)
 
-
 def stop_rtlamr():
-    """Stop and hard kill opened rtlamr process."""
-    logging.info("Shutting down rtlamr")
-    rtlamr.send_signal(15)
-    time.sleep(1)
-    rtlamr.send_signal(9)
-
+    global rtlamr
+    if rtlamr:
+        try:
+            if rtlamr.stdout:
+                rtlamr.stdout.close()
+            if rtlamr.poll() is None:
+                logging.info("Shutting down rtlamr")
+                rtlamr.terminate()
+                rtlamr.wait(timeout=1)
+        except Exception:
+            rtlamr.kill()
 
 def start_rtlamr():
     """Start rtlamr program."""
@@ -388,10 +401,50 @@ def main_loop():
     """Loop and process messages from rtlamr."""
     idm_intervals = {}
     mqttc.loop_start()
+
+    last_output_time = time.time()
+    STALL_TIMEOUT = 30  # seconds
+
     while True:
         try:
-            amr_line = rtlamr.stdout.readline().strip()
-            amr_dict = json.loads(amr_line)
+            # 🔴 Detect crashed process
+            if rtlamr.poll() is not None:
+                logging.error(
+                    "rtlamr exited with code %s", rtlamr.returncode
+                )
+                restart_rtlamr()
+                last_output_time = time.time()
+                continue
+
+            # 🔴 Detect silent hang
+            if time.time() - last_output_time > STALL_TIMEOUT:
+                logging.error("rtlamr stalled (no output for %ss)", STALL_TIMEOUT)
+                restart_rtlamr()
+                last_output_time = time.time()
+                continue
+
+            amr_line = rtlamr.stdout.readline()
+
+            # 🔴 Detect closed stdout (process died or pipe broken)
+            if not amr_line:
+                logging.error("rtlamr stdout closed")
+                restart_rtlamr()
+                last_output_time = time.time()
+                continue
+
+            amr_line = amr_line.strip()
+
+            # Ignore blank lines
+            if not amr_line:
+                continue
+
+            last_output_time = time.time()
+
+            try:
+                amr_dict = json.loads(amr_line)
+            except json.JSONDecodeError:
+                logging.debug("Invalid JSON from rtlamr: %r", amr_line)
+                continue
 
             # Must have `message` or we ignore
             if "Message" not in amr_dict:
@@ -509,8 +562,8 @@ def main_loop():
 
         except Exception as ex:  # pylint: disable=broad-except
             logging.debug("Exception squashed! %s: %s", ex.__class__.__name__, ex)
+            logging.debug("amr_line: %r", amr_line if 'amr_line' in locals() else None)
             time.sleep(2)
-
 
 # Register signals we listen for
 signal.signal(signal.SIGTERM, shutdown)
