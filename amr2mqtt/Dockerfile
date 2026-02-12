@@ -61,10 +61,10 @@ LABEL \
     maintainer="Alvarofg" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="mdegat01's Home Assistant Add-ons" \
-    org.opencontainers.image.authors="mdegat01" \
+    org.opencontainers.image.vendor="Alvarofg's Home Assistant Add-ons" \
+    org.opencontainers.image.authors="Alvarofg" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://github.com/mdegat01/hassio-addons" \
+    org.opencontainers.image.url="https://github.com/Alvarofg/hassio-addons" \
     org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
     org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \

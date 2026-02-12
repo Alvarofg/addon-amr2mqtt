@@ -29,7 +29,7 @@ from rtl-sdr.com and haven't had any issues since.
 
 ## Install
 
-First add the repository to the add-on store (`https://github.com/mdegat01/hassio-addons`):
+First add the repository to the add-on store (`https://github.com/Alvarofg/hassio-addons`):
 
 [![Open your Home Assistant instance and show the add add-on repository dialog
 with a specific repository URL pre-filled.][add-repo-shield]][add-repo]

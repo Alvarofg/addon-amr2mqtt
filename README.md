@@ -6,9 +6,6 @@
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
-![Supports armhf Architecture][armhf-shield]
-![Supports armv7 Architecture][armv7-shield]
-![Supports i386 Architecture][i386-shield]
 
 [![Github Actions][github-actions-shield]][github-actions]
 ![Project Maintenance][maintenance-shield]
@@ -49,7 +46,7 @@ You could also [open an issue here][issue] on GitHub.
 
 ## Authors & contributors
 
-The original setup of this repository is by [Mike Degatano][Alvarofg].
+The original setup of this repository is by [Mike Degatano][mdegat01].
 
 For a full list of all authors and contributors,
 check [the contributor's page][contributors].
@@ -65,8 +62,6 @@ See [LICENSE](LICENSE).
 [add-repo]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAlvarofg%2Fhassio-addons
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [amridm2mqtt]: https://github.com/ragingcomputer/amridm2mqtt
-[armhf-shield]: https://img.shields.io/badge/armhf-no-red.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [commits-shield]: https://img.shields.io/github/commit-activity/y/Alvarofg/addon-amr2mqtt.svg
 [commits]: https://github.com/Alvarofg/addon-amr2mqtt/commits/main
 [contributors]: https://github.com/Alvarofg/addon-amr2mqtt/graphs/contributors
@@ -77,7 +72,6 @@ See [LICENSE](LICENSE).
 [mdegat01]: https://github.com/mdegat01
 [github-actions-shield]: https://github.com/Alvarofg/addon-amr2mqtt/workflows/CI/badge.svg
 [github-actions]: https://github.com/Alvarofg/addon-amr2mqtt/actions
-[i386-shield]: https://img.shields.io/badge/i386-no-red.svg
 [issue]: https://github.com/Alvarofg/addon-amr2mqtt/issues
 [license-shield]: https://img.shields.io/github/license/Alvarofg/addon-amr2mqtt.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
