@@ -1,12 +1,52 @@
 ---
-name: Release Drafter
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+categories:
+  - title: "🚨 Breaking Changes"
+    labels:
+      - "breaking-change"
+  - title: "🎉 New Features"
+    labels:
+      - "new-feature"
+  - title: "🐛 Bug Fixes"
+    labels:
+      - "bugfix"
+  - title: "🚀 Enhancements"
+    labels:
+      - "enhancement"
+  - title: "🏎 Performance"
+    labels:
+      - "performance"
+  - title: "🧰 Maintenance"
+    labels:
+      - "maintenance"
+      - "ci"
+      - "dependencies"
+  - title: "📚 Documentation"
+    labels:
+      - "documentation"
+  - title: "🔨 Refactoring"
+    labels:
+      - "refactor"
+version-resolver:
+  major:
+    labels:
+      - "breaking-change"
+  minor:
+    labels:
+      - "new-feature"
+      - "enhancement"
+  patch:
+    labels:
+      - "bugfix"
+      - "performance"
+      - "maintenance"
+      - "ci"
+      - "dependencies"
+      - "documentation"
+      - "refactor"
+  default: patch
+template: |
+  ## What's Changed
 
-# yamllint disable-line rule:truthy
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  workflows:
-    uses: mdegat01/addon-workflows/.github/workflows/release-drafter.yaml@main
+  $CHANGES
