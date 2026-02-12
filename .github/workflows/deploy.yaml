@@ -81,8 +81,8 @@ jobs:
               environment="beta"
             fi
           fi
-          echo "::set-output name=environment::${environment}"
-          echo "::set-output name=version::${version}"
+          echo "environment=${environment}" >> $GITHUB_OUTPUT
+          echo "version=${version}" >> $GITHUB_OUTPUT
   deploy:
     name: 👷 Build & Deploy ${{ matrix.architecture }}
     needs: information
@@ -119,12 +119,6 @@ jobs:
           echo "::set-output name=from::${from}"
           if [[ "${{ matrix.architecture}}" = "amd64" ]]; then
             echo "::set-output name=platform::linux/amd64"
-          elif [[ "${{ matrix.architecture }}" = "i386" ]]; then
-            echo "::set-output name=platform::linux/386"
-          elif [[ "${{ matrix.architecture }}" = "armhf" ]]; then
-            echo "::set-output name=platform::linux/arm/v6"
-          elif [[ "${{ matrix.architecture }}" = "armv7" ]]; then
-            echo "::set-output name=platform::linux/arm/v7"
           elif [[ "${{ matrix.architecture }}" = "aarch64" ]]; then
             echo "::set-output name=platform::linux/arm64/v8"
           else
@@ -214,7 +208,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2.0.0
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
-          repository: mdegat01/hassio-addons-edge
+          repository: Alvarofg/hassio-addons-edge
           event-type: update
           client-payload: >
             {
@@ -223,31 +217,7 @@ jobs:
               "repository": "${{ github.repository }}",
               "version": "${{ needs.information.outputs.version }}"
             }
-  publish-beta:
-    name: 📢 Publish to beta repository
-    if: |
-      needs.information.outputs.environment == 'beta' ||
-      needs.information.outputs.environment == 'stable'
-    needs:
-      - information
-      - deploy
-    environment:
-      name: beta
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚀 Dispatch repository updater update signal
-        uses: peter-evans/repository-dispatch@v2.0.0
-        with:
-          token: ${{ secrets.DISPATCH_TOKEN }}
-          repository: mdegat01/hassio-addons-beta
-          event-type: update
-          client-payload: >
-            {
-              "addon": "${{ needs.information.outputs.slug }}",
-              "name": "${{ needs.information.outputs.name }}",
-              "repository": "${{ github.repository }}",
-              "version": "${{ needs.information.outputs.version }}"
-            }
+
   publish-stable:
     name: 📢 Publish to stable repository
     if: needs.information.outputs.environment == 'stable'
@@ -262,7 +232,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2.0.0
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
-          repository: mdegat01/hassio-addons
+          repository: Alvarofg/hassio-addons
           event-type: update
           client-payload: >
             {
