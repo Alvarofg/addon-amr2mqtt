@@ -1,5 +1,5 @@
 {
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/release-drafter/release-drafter/master/schema.json": ".github/workflows/release-drafter.yaml"
+    "https://raw.githubusercontent.com/release-drafter/release-drafter/master/schema.json": ".github/release-drafter.yaml"
   }
 }
