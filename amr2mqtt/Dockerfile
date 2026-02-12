@@ -1,9 +1,9 @@
 # hadolint global ignore=DL3008
 # ignoring DL3008 (pin versions) as we are using the official images
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.8.3
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:9.2.0
 
 # https://hub.docker.com/_/golang
-FROM golang:1.25.6-alpine3.22 AS build_rtlamr
+FROM golang:1.25.6-alpine3.23 AS build_rtlamr
 # https://github.com/bemasher/rtlamr/releases
 ENV RTLAMR_VERSION=0.9.4
 ENV GOBIN=/usr/bin
@@ -58,7 +58,7 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="mdegat01" \
+    maintainer="Alvarofg" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="mdegat01's Home Assistant Add-ons" \
