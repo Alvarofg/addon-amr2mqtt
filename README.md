@@ -33,7 +33,9 @@ for their work as well as all the info in the `rtlamr` repo.
 
 ## Suggested Hardware
 
-As an Amazon Associate I earn a small commission from qualifying purchases. It does not in any way change the prices on Amazon. I appreciate your support, if you purchase using the links below.
+As an Amazon Associate I earn a small commission from qualifying purchases.
+It does not in any way change the prices on Amazon.
+I appreciate your support, if you purchase using the links below.
 
 ### Software Defined Radio
 
