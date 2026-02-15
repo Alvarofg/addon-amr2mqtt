@@ -31,6 +31,18 @@ There are a number of other modifications as well such as support for other form
 like `scm` and a wider variety of MQTT configurations. Big thanks to ragingcomputer's
 for their work as well as all the info in the `rtlamr` repo.
 
+## Suggested Hardware
+
+As an Amazon Associate I earn a small commission from qualifying purchases. It does not in any way change the prices on Amazon. I appreciate your support, if you purchase using the links below.
+
+### Software Defined Radio
+
+- [Nooelec RTL-SDR](https://amzn.to/4rfxs5Z) <-- This is the one I'm currently using
+
+### Raspberry Pi
+
+- Raspberry Pi 5
+
 ## Support
 
 Got questions?
@@ -74,7 +86,7 @@ See [LICENSE](LICENSE).
 [github-actions]: https://github.com/Alvarofg/addon-amr2mqtt/actions
 [issue]: https://github.com/Alvarofg/addon-amr2mqtt/issues
 [license-shield]: https://img.shields.io/github/license/Alvarofg/addon-amr2mqtt.svg
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
 [ragingcomputer]: https://github.com/ragingcomputer
 [releases-shield]: https://img.shields.io/github/release/Alvarofg/addon-amr2mqtt.svg
