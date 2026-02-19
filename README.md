@@ -71,7 +71,7 @@ See [LICENSE](LICENSE).
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [add-addon-shield]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[add-addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=39bd2704_amr2mqtt
+[add-addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=516f22b1_amr2mqtt
 [add-repo-shield]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
 [add-repo]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAlvarofg%2Fhassio-addons
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
