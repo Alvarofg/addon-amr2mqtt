@@ -162,7 +162,9 @@ used in discovery messages.
 
 #### Sub-option: `state_class`
 
-Type of state class. Defaults to total. 'total_increasing' is commonly used for water and gas meters where value would not normally decrease. (see [HA docs][sensor_ha_docs])
+Type of state class. Defaults to total. 'total_increasing' is commonly used for
+water and gas meters where value would not normally decrease.
+(see [HA docs][sensor_ha_docs])
 
 #### Sub-option: `unit_of_measurement`
 
