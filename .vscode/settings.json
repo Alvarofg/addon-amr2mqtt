@@ -3,5 +3,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "yaml.schemas": {
     "https://raw.githubusercontent.com/release-drafter/release-drafter/master/schema.json": ".github/release-drafter.yaml"
-  }
+  },
+  "files.eol": "\n"
 }
