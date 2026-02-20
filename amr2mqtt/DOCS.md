@@ -160,6 +160,10 @@ multiplier is applied. If omitted, result will not be rounded.
 Type of meter. must be one of the following: `gas`, `water`, or `energy`. Only
 used in discovery messages.
 
+#### Sub-option: `state_class`
+
+Type of state class. Defaults to total. 'total_increasing' is commonly used for water and gas meters where value would not normally decrease. (see [HA docs][sensor_ha_docs])
+
 #### Sub-option: `unit_of_measurement`
 
 Unit of measurement for the consumption value. Only used in discovery messages.
@@ -367,3 +371,4 @@ SOFTWARE.
 [rtlamr-configuration]: https://github.com/bemasher/rtlamr/wiki/Configuration
 [rtlamr-protocols]: https://github.com/bemasher/rtlamr/wiki/Protocol
 [semver]: http://semver.org/spec/v2.0.0
+[sensor_ha_docs]: https://developers.home-assistant.io/docs/core/entity/sensor/

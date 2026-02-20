@@ -223,7 +223,7 @@ def create_interval_sensor(meter_id, meter, device_name, device_id):
 
 def set_consumption_details(payload, meter):
     """Set discovery details for a consumption sensor."""
-    payload["state_class"] = "total"
+    payload["state_class"] = meter.get("state_class", "total")
     if "type" in meter:
         if meter["type"] == "gas":
             payload["device_class"] = "gas"
@@ -240,17 +240,19 @@ def set_consumption_details(payload, meter):
     return payload
 
 
-def create_sensor(attribute, device_name, device_id, enabled=True, category=None):
+def create_sensor(attribute, device_name, device_id, enabled=True, category=None, state_class=None):
     """Create generic discovery message to make reading attribute into sensor."""
     # Turn camelcase into spaces
     name = re.sub(r"([^A-Z]|ERT)([A-Z])", r"\1 \2", attribute)
     sensor = {
         "enabled_by_default": enabled,
         "name": f"{device_name} {name}",
-        "state_class": "measurement",
         "unique_id": f"{device_id}_{attribute}",
         "value_template": f"{{{{ value_json.{attribute} }}}}",
     }
+
+    if state_class:
+        sensor["state_class"] = state_class
 
     if category:
         sensor["entity_category"] = category
@@ -303,6 +305,7 @@ def send_discovery_messages():
                 attribute=CONSUMPTION_FIELD,
                 device_name=device_name,
                 device_id=device_id,
+                state_class=meter.get("state_class", "total"),
             ),
             meter=meter,
         )
