@@ -138,28 +138,20 @@ def start_rtlamr():
     )
 
 
-def on_mqtt_connect(client, userdata, flags, result):  # pylint: disable=unused-argument
+def on_mqtt_connect(client, userdata, flags, reason_code, properties):  # pylint: disable=unused-argument
     """Send online message on connect."""
-    if result == 0:
+    if not reason_code.is_failure:
         client.publish(
             topic=settings.MQTT_AVAILABILTY_TOPIC,
             payload="online",
             retain=True,
         )
     else:
-        error_log = "MQTT Broker refused connection - %s (result code %s)"
-        if result == 1:
-            logging.error(error_log, "Incorrect protocol version", result)
-        elif result == 2:
-            logging.error(error_log, "Invalid client identifier", result)
-        elif result == 3:
-            logging.error(error_log, "Server unavailable", result)
-        elif result == 4:
-            logging.error(error_log, "Bad username or password", result)
-        elif result == 5:
-            logging.error(error_log, "Not authorised", result)
-        else:
-            logging.error(error_log, "Unknown error", result)
+        logging.error(
+            "MQTT Broker refused connection: %s (%s)",
+            reason_code.getName(),
+            reason_code.value,
+        )
 
         stop_rtlamr()
         sys.exit(0)
@@ -167,7 +159,11 @@ def on_mqtt_connect(client, userdata, flags, result):  # pylint: disable=unused-
 
 def create_mqtt_client():
     """Create MQTT client with TLS and auth if necessary."""
-    client = mqtt.Client(client_id=settings.MQTT_CLIENT_ID)
+    client = mqtt.Client(
+        client_id=settings.MQTT_CLIENT_ID,
+        protocol=mqtt.MQTTv311,
+        callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
+    )
     client.on_connect = on_mqtt_connect
     client.will_set(
         topic=settings.MQTT_AVAILABILTY_TOPIC,
@@ -192,11 +188,17 @@ def create_mqtt_client():
     logging.info(
         "Connecting to MQTT broker at %s:%s", settings.MQTT_HOST, settings.MQTT_PORT
     )
-    client.connect(
-        host=settings.MQTT_HOST,
-        port=settings.MQTT_PORT,
-        keepalive=60,
-    )
+    try:
+        client.connect(
+            host=settings.MQTT_HOST,
+            port=settings.MQTT_PORT,
+            keepalive=60,
+        )
+    except Exception as e:
+        logging.error("Failed to connect to MQTT broker: %s", e)
+        stop_rtlamr()
+        sys.exit(1)
+    
     return client
 
 
