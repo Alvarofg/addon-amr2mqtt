@@ -29,6 +29,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: read
+
 jobs:
   information:
     if: |
