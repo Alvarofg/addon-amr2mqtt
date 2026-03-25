@@ -9,4 +9,8 @@ on:
 
 jobs:
   workflows:
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     uses: mdegat01/addon-workflows/.github/workflows/stale.yaml@main
