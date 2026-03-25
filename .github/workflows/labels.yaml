@@ -1,6 +1,9 @@
 ---
 name: Sync labels
 
+permissions:
+  contents: read
+
 # yamllint disable-line rule:truthy
 on:
   schedule:
