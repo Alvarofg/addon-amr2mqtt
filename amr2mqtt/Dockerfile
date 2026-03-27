@@ -61,6 +61,7 @@ LABEL \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
     maintainer="Alvarofg" \
+    org.opencontainers.image.dependencies="github.com/bemasher/rtlamr:0.9.4" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Alvarofg's Home Assistant Add-ons" \
