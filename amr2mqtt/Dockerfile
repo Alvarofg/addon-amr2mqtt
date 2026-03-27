@@ -1,3 +1,5 @@
+# External Dependencies:
+# - github.com/bemasher/rtlamr (v0.9.4) - RTL-SDR to MQTT bridge
 # hadolint global ignore=DL3008
 # ignoring DL3008 (pin versions) as we are using the official images
 ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:9.2.0
