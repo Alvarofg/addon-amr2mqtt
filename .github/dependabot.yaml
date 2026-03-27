@@ -9,3 +9,7 @@ updates:
     directory: "/amr2mqtt"
     schedule:
       interval: daily
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: monthly
