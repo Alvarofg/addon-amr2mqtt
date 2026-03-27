@@ -104,15 +104,15 @@ Example add-on configuration:
 
 ```yaml
 meters:
-  - id: 12345678
-    protocol: scm
-    name: My gas meter
-    type: gas
-    multiplier: 0.01
-    unit_of_measurement: CCF
+   - id: 12345678
+     protocol: scm
+     name: My gas meter
+     type: gas
+     multiplier: 0.01
+     unit_of_measurement: CCF
 mqtt:
-  host: 127.0.0.1
-  port: 1883
+   host: 127.0.0.1
+   port: 1883
 ```
 
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
