@@ -11,4 +11,6 @@ jobs:
   workflows:
     permissions:
       contents: read
-    uses: mdegat01/addon-workflows/.github/workflows/lock.yaml@main
+      issues: write
+      pull-requests: write
+    uses: Alvarofg/addon-workflows/.github/workflows/lock.yaml@main
