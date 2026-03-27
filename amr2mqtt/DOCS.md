@@ -279,7 +279,7 @@ asking it to do. R900 messages specifically seem to require a lot of work to pro
 and not all machines can keep up. See [here][reddit-ll-issue] for a full explanation.
 
 If you are doing debug and discovery and have `meters` set to empty then
-you can just ignore this. Just finish yoour debugging and then fill in `meters`
+you can just ignore this. Just finish your debugging and then fill in `meters`
 so it only processes messages in the protocol(s) you need. Hopefully it will go
 away then.
 

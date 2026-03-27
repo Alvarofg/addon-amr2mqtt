@@ -39,7 +39,7 @@ I appreciate your support, if you purchase using the links below.
 
 ### Software Defined Radio
 
-- [Nooelec RTL-SDR](https://amzn.to/4rfxs5Z) <-- This is the one I'm currently using
+- [Nooelec RTL-SDR](https://amzn.to/4rfxs5Z) <- This is the one I'm currently using
 
 ### Raspberry Pi
 
