@@ -16,4 +16,4 @@ permissions:
 
 jobs:
   workflows:
-    uses: mdegat01/addon-workflows/.github/workflows/pr-labels.yaml@main
+    uses: Alvarofg/addon-workflows/.github/workflows/pr-labels.yaml@main
