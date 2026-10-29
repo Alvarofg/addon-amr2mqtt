@@ -5,12 +5,16 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:9.2.0
 
 # https://hub.docker.com/_/golang
-FROM golang:1.26.4-alpine3.23 AS build_rtlamr
+FROM golang:1.27.3-alpine3.23 AS build_rtlamr
 # https://github.com/bemasher/rtlamr/releases
 ENV RTLAMR_VERSION=0.9.5
+# https://github.com/bemasher/rtlamr/commit/0adbc1b5242bc372aff76fa3edc94af2bc590ef7
+# Fixes Error: not keeping up with rtl_tcp #338
+ENV RTLAMR_COMMIT=0adbc1b5242bc372aff76fa3edc94af2bc590ef7 
 ENV GOBIN=/usr/bin
 RUN set -eux; \
-    go install "github.com/bemasher/rtlamr@v${RTLAMR_VERSION}"; \
+    # go install "github.com/bemasher/rtlamr@v${RTLAMR_VERSION}"; \
+    go install "github.com/bemasher/rtlamr@${RTLAMR_COMMIT}"; \
     rtlamr --version
 
 
@@ -61,7 +65,7 @@ LABEL \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
     maintainer="Alvarofg" \
-    org.opencontainers.image.dependencies="github.com/bemasher/rtlamr:0.9.4" \
+    org.opencontainers.image.dependencies="github.com/bemasher/rtlamr:0.9.5" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Alvarofg's Home Assistant Add-ons" \
