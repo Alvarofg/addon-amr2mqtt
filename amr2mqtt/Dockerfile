@@ -5,7 +5,7 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:9.2.0
 
 # https://hub.docker.com/_/golang
-FROM golang:1.27.3-alpine3.23 AS build_rtlamr
+FROM golang:1.27.4-alpine3.23 AS build_rtlamr
 # https://github.com/bemasher/rtlamr/releases
 ENV RTLAMR_VERSION=0.9.5
 # https://github.com/bemasher/rtlamr/commit/0adbc1b5242bc372aff76fa3edc94af2bc590ef7
